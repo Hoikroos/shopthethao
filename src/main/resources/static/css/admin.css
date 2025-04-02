@@ -1,0 +1,92 @@
+#productImage {
+    max-height: 300px;
+    object-fit: cover;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+}
+.form-control {
+    border-radius: 10px;
+    border-color: #7a6f6f;
+}
+.form-check-input {
+    border-radius: 10px;
+    border-color: #7a6f6f;
+}
+.form-select {
+    border-radius: 10px;
+    border-color: #7a6f6f;
+}
+.img-fluid {
+    border-radius: 10px;
+    border-color: #7a6f6f;
+}
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.nav-link {
+    color: #333;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    color: #fff;
+    background-color: #0d6efd; 
+    border-radius: 4px;
+    padding-left: 10px;
+}
+
+.nav-link i {
+    transition: transform 0.3s ease-in-out;
+}
+
+.nav-link:hover i {
+    transform: scale(1.2); 
+}
+
+.nav-link.active {
+    background-color: #0d6efd;
+    color: #fff;
+    border-radius: 4px;
+}
+table img {
+    border: 2px solid #ddd;
+    padding: 2px;
+}
+table th, table td {
+    vertical-align: middle !important;
+}
+#userPhoto {
+    border: 3px solid #ddd;
+    transition: transform 0.2s;
+}
+#userPhoto:hover {
+    transform: scale(1.05);
+}
+#productImage {
+    border: 3px solid #ddd;
+    transition: transform 0.2s;
+}
+#productImage:hover {
+    transform: scale(1.05);
+}
+.table {
+    border-radius: 8px;
+    overflow: hidden;
+}
+.table th {
+    background-color: #343a40;
+    color: white;
+}
+.table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+.img-thumbnail {
+    border-radius: 8px;
+    transition: transform 0.2s;
+}
+.img-thumbnail:hover {
+    transform: scale(1.1);
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lí hóa đơn</title>
+    <link rel="stylesheet" href="/bootstrap-5.3.3/dist/css/bootstrap.css">
+    <script src="/bootstrap-5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-3">
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <li class="nav-item">
+                        <a th:href="@{/home}" class="nav-link active" aria-current="page">
+                            Quay lại trang chủ
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link link-body-emphasis">
+                            <img src="/photo/logo.png" alt="" class="img-fluid" style="width: 50px;">KROOS SPORT
+                        </a>
+                    </li>
+                    <ul>
+                        <li>
+                            <a th:href="@{/admin}" class="nav-link link-body-emphasis">
+                                <i class="fa-solid fa-boxes-stacked me-2"></i>
+                                Quản Lí Sản Phẩm
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/category/index}" class="nav-link link-body-emphasis">
+                                <i class="fa-solid fa-tags me-2"></i>
+                                Quản Lí Loại Sản Phẩm
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/bill}" class="nav-link link-body-emphasis">
+                                <i class="fa-solid fa-file-invoice-dollar me-2"></i>
+                                Quản Lí Hóa Đơn
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/userManage}" class="nav-link link-body-emphasis">
+                                <i class="fa-solid fa-users me-2"></i>
+                                Quản Lí Người Dùng
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/statistics}" class="nav-link link-body-emphasis">
+                                <i class="fa-solid fa-chart-pie me-2"></i>
+                                Thống Kê
+                            </a>
+                        </li>
+                    </ul>
+                </ul>
+            </div>
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-header bg-success text-white">
+                        <h5>Quản Lí Hóa Đơn</h5>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tên khách hàng</th>
+                                    <th>Địa chỉ</th>
+                                    <th>Ngày tạo</th>
+                                </tr>
+                            </thead>
+                            <tbody id="">
+                                <th:block th:each="o : ${orders}">
+                                    <tr>
+                                        <td th:text="${o.id}"></td>
+                                        <td th:text="${o.account.fullname}"></td>
+                                        <td th:text="${o.address}"></td>
+                                        <td th:text="${#temporals.format(o.createDate, 'dd/MM/yyyy')}"></td>                                 
+                                    </tr>
+                                </th:block>
+                            </tbody>                            
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

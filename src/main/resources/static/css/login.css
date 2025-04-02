@@ -1,0 +1,403 @@
+/* Premium Product Detail Page Styling */
+:root {
+    --primary-color: #3a6ea5;
+    --primary-light: #4c7dbb;
+    --primary-dark: #2c5282;
+    --secondary-color: #f8b400;
+    --accent-color: #ff6b6b;
+    --success-color: #38b2ac;
+    --warning-color: #ed8936;
+    --danger-color: #e53e3e;
+    --light-bg: #f7fafc;
+    --dark-bg: #2d3748;
+    --text-color: #1a202c;
+    --text-muted: #718096;
+    --border-radius: 12px;
+    --box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --hover-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Open Sans', sans-serif;
+}
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap');
+
+body {
+    font-family: var(--font-body);
+    color: var(--text-color);
+    background-color: #f5f7fa;
+    line-height: 1.7;
+}
+
+.container {
+    max-width: 1200px;
+    padding: 0 15px;
+    margin: 0 auto;
+}
+
+/* Product Image Container */
+.product-image-container {
+    position: relative;
+    padding: 2rem !important;
+    border-radius: var(--border-radius) !important;
+    border: none !important;
+    background: white !important;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 450px;
+}
+
+.product-image-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+    z-index: 1;
+}
+
+.product-image-container:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--hover-shadow);
+}
+
+.product-image {
+    max-width: 100%;
+    max-height: 380px;
+    object-fit: contain !important;
+    transition: var(--transition);
+    z-index: 2;
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.1));
+}
+
+.product-image-container:hover .product-image {
+    transform: scale(1.05);
+}
+
+/* Product Details */
+.product-details {
+    border-radius: var(--border-radius) !important;
+    border: none !important;
+    box-shadow: var(--box-shadow);
+    padding: 2rem !important;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(to bottom right, #ffffff, #f8f9fa) !important;
+}
+
+.product-details::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(76, 125, 187, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+    border-radius: 0 0 0 100%;
+    z-index: 0;
+}
+
+.product-details h2 {
+    font-family: var(--font-heading);
+    font-weight: 700 !important;
+    color: var(--primary-dark) !important;
+    font-size: 2rem;
+    margin-bottom: 1.5rem !important;
+    position: relative;
+    padding-bottom: 0.75rem;
+    z-index: 1;
+}
+
+.product-details h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(to right, var(--primary-color), var(--primary-light));
+    border-radius: 3px;
+}
+
+.product-details h4 {
+    font-family: var(--font-heading);
+    color: var(--accent-color) !important;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem !important;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+}
+
+.product-details h4::before {
+    content: '\f3d1';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+}
+
+.product-details h6 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--primary-dark);
+    margin-bottom: 0.5rem !important;
+    font-size: 1.1rem;
+    z-index: 1;
+}
+
+.product-details p {
+    color: var(--text-muted);
+    line-height: 1.8;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    border-left: 3px solid var(--primary-light);
+    margin-bottom: 2rem !important;
+    z-index: 1;
+}
+
+/* Quantity Selector */
+.input-group {
+    margin-bottom: 1.5rem !important;
+    width: 160px !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border-radius: 50px;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.input-group button {
+    width: 40px !important;
+    height: 40px;
+    border: none !important;
+    background-color: var(--primary-color) !important;
+    color: white !important;
+    font-size: 1.2rem !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--transition);
+    padding: 0 !important;
+}
+
+.input-group button:hover {
+    background-color: var(--primary-dark) !important;
+}
+
+.input-group button:first-child {
+    border-radius: 50px 0 0 50px !important;
+}
+
+.input-group button:last-child {
+    border-radius: 0 50px 50px 0 !important;
+}
+
+.input-group input {
+    height: 40px;
+    border: none !important;
+    text-align: center;
+    font-weight: 600;
+    color: var(--primary-dark);
+    background-color: white;
+    box-shadow: none !important;
+    padding: 0 !important;
+    width: 60px !important;
+}
+
+/* Add to Cart Button */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark)) !important;
+    border: none !important;
+    border-radius: 50px !important;
+    padding: 0.8rem 1.5rem !important;
+    font-family: var(--font-heading);
+    font-weight: 600 !important;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-size: 1rem;
+    box-shadow: 0 4px 15px rgba(58, 110, 165, 0.3);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: all 0.6s ease;
+    z-index: -1;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(58, 110, 165, 0.4);
+}
+
+.btn-primary:hover::before {
+    left: 100%;
+}
+
+.btn-primary i {
+    margin-right: 0.5rem;
+    font-size: 1.1rem;
+    transition: var(--transition);
+}
+
+.btn-primary:hover i {
+    transform: translateX(-3px);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991.98px) {
+    .product-details h2 {
+        font-size: 1.8rem;
+    }
+
+    .product-details h4 {
+        font-size: 1.3rem;
+    }
+
+    .product-image-container {
+        height: 400px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .product-image-container {
+        height: 350px;
+        margin-bottom: 2rem;
+    }
+
+    .product-details {
+        padding: 1.5rem !important;
+    }
+
+    .product-details h2 {
+        font-size: 1.6rem;
+    }
+
+    .product-details h4 {
+        font-size: 1.2rem;
+    }
+
+    .product-details p {
+        font-size: 0.95rem;
+        padding: 0.8rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .product-image-container {
+        height: 300px;
+        padding: 1.5rem !important;
+    }
+
+    .product-details h2 {
+        font-size: 1.4rem;
+    }
+
+    .product-details h4 {
+        font-size: 1.1rem;
+    }
+
+    .btn-primary {
+        padding: 0.7rem 1.2rem !important;
+        font-size: 0.9rem;
+    }
+}
+
+/* Animation for page load */
+.container {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Enhance focus states for accessibility */
+button:focus,
+a:focus {
+    outline: 2px solid var(--primary-light);
+    outline-offset: 2px;
+}
+
+/* Add a subtle texture to the background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%239C92AC' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Add a subtle hover effect to the product image */
+.product-image-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, transparent 50%, rgba(0, 0, 0, 0.03) 100%);
+    opacity: 0;
+    transition: var(--transition);
+    z-index: 0;
+}
+
+.product-image-container:hover::after {
+    opacity: 1;
+}
+
+/* Add a subtle shadow to the product image */
+.product-image {
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.1));
+}
+
+/* Add a subtle animation to the add to cart button */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(58, 110, 165, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(58, 110, 165, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(58, 110, 165, 0);
+    }
+}
+
+.btn-primary:focus {
+    animation: pulse 1.5s infinite;
+}

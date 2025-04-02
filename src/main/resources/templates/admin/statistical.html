@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thống kê</title>
+    <link rel="stylesheet" href="/bootstrap-5.3.3/dist/css/bootstrap.css">
+    <script src="/bootstrap-5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-3">
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <li class="nav-item">
+                        <a th:href="@{/home}" class="nav-link active" aria-current="page">
+                            Quay lại trang chủ
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link link-body-emphasis">
+                            <img src="/photo/logo.png" alt="" class="img-fluid" style="width: 50px;">KROOS SPORT
+                        </a>
+                    </li>
+                    <ul>
+                        <li>
+                            <a th:href="@{/admin}" class="nav-link link-body-emphasis">
+                                <i class="fa-solid fa-boxes-stacked me-2"></i>
+                                Quản Lí Sản Phẩm
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/category/index}" class="nav-link link-body-emphasis">
+                                <i class="fa-solid fa-tags me-2"></i>
+                                Quản Lí Loại Sản Phẩm
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/bill}" class="nav-link link-body-emphasis">
+                                <i class="fa-solid fa-file-invoice-dollar me-2"></i>
+                                Quản Lí Hóa Đơn
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/userManage}" class="nav-link link-body-emphasis">
+                                <i class="fa-solid fa-users me-2"></i>
+                                Quản Lí Người Dùng
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/statistics}" class="nav-link link-body-emphasis">
+                                <i class="fa-solid fa-chart-pie me-2"></i>
+                                Thống Kê
+                            </a>
+                        </li>
+                    </ul>
+                </ul>
+            </div>
+            <div class="col">
+                <div>
+                    <h2>Thống Kê Kết Quả Kinh Doanh</h2>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+                                type="button" role="tab" aria-controls="home" aria-selected="true">Doanh thu</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
+                                type="button" role="tab" aria-controls="profile" aria-selected="false">Khách hàng
+                                VIP</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="container my-3">
+                                <div class="card shadow mb-4">
+                                    <div class="card-header bg-primary text-white">
+                                        <h5>Thống kê doanh thu theo loại hàng</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="row mb-3">
+                                                <label for="productType" class="col-sm-3 col-form-label">Loại
+                                                    hàng:</label>
+                                                <div class="col-sm-9">
+                                                    <select class="form-select" id="productType" name="productType"
+                                                        onchange="filterByCategory(this.value)">
+                                                        <option value="">Chọn loại hàng</option>
+                                                        <option th:each="item : ${categories}" th:value="${item.id}"
+                                                            th:selected="${item.id == param.category}"
+                                                            th:text="${item.name}">
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div id="statistics-container" th:if="${selectedItem != null}">
+                                                <div class="row mb-3">
+                                                    <label for="totalRevenue" class="col-sm-3 col-form-label">Tổng doanh
+                                                        thu:</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="totalRevenue"
+                                                            th:value="${selectedItem.sum != null ? #numbers.formatDecimal(selectedItem.sum,0, 0,'COMMA') + ' VNĐ' : 'Không có dữ liệu'}"
+                                                            readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <label for="totalQuantity" class="col-sm-3 col-form-label">Tổng số
+                                                        lượng:</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="totalQuantity"
+                                                            th:value="${selectedItem.count != null ? #numbers.formatDecimal(selectedItem.count, 0, 0,'COMMA') : 'Không có dữ liệu'}"
+                                                            readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <label for="maxPrice" class="col-sm-3 col-form-label">Giá cao
+                                                        nhất:</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="maxPrice"
+                                                            th:value="${selectedItem.maxPrice != null ? #numbers.formatDecimal(selectedItem.maxPrice, 0, 0,'COMMA') + ' VNĐ' : 'Không có dữ liệu'}"
+                                                            readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <label for="minPrice" class="col-sm-3 col-form-label">Giá thấp
+                                                        nhất:</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="minPrice"
+                                                            th:value="${selectedItem.minPrice != null ? #numbers.formatDecimal(selectedItem.minPrice, 0, 0,'COMMA') + ' VNĐ' : 'Không có dữ liệu'}"
+                                                            readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <label for="avgPrice" class="col-sm-3 col-form-label">Giá trung
+                                                        bình:</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="avgPrice"
+                                                            th:value="${selectedItem.avgPrice != null ? #numbers.formatDecimal(selectedItem.avgPrice, 0, 0,'COMMA') + ' VNĐ' : 'Không có dữ liệu'}"
+                                                            readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div th:if="${selectedItem.sum == null}">
+                                                <p class="text-muted">Không có dữ liệu thống kê cho loại hàng đã chọn.
+                                                </p>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div id="loading-spinner" class="text-center mt-3" style="display:none;">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                    <script>
+                                        function filterByCategory(categoryId) {
+                                            document.getElementById('loading-spinner').style.display = 'block';
+                                            if (categoryId) {
+                                                window.location.href = '/statistics?category=' + categoryId;
+                                            } else {
+                                                window.location.href = '/statistics';
+                                            }
+                                        }
+                                    </script>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <div class="card shadow">
+                        <div class="card-header bg-success text-white">
+                            <h5>Top 10 Khách Hàng VIP</h5>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered table-hover">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Tên khách hàng</th>
+                                        <th>Tổng tiền đã mua</th>
+                                        <th>Ngày mua đầu tiên</th>
+                                        <th>Ngày mua sau cùng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="customer, iterStat : ${vipCustomers}">
+                                        <td th:text="${iterStat.index + 1}"></td>
+                                        <td th:text="${customer.customerName}"></td>
+                                        <td th:text="${#numbers.formatDecimal(customer.totalSpent, 0)} + ' VND'"></td>
+                                        <td th:text="${#dates.format(customer.firstPurchaseDate, 'dd/MM/yyyy')}"></td>
+                                        <td th:text="${#dates.format(customer.lastPurchaseDate, 'dd/MM/yyyy')}"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

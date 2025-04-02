@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thay đổi thông tin </title>
+    <link rel="stylesheet" href="/bootstrap-5.3.3/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="/bootstrap-5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="/css/edit.css">
+</head>
+
+<body>
+    <div class="container">
+        <header th:replace="~{layouts/header}"></header>
+        <article>
+            <div class="container1">
+                <div class="heading">Thay đổi thông tin người dùng</div>
+                <form action="/updateProfile" method="post" class="form" enctype="multipart/form-data">
+                    <div id="successBox" class="message-box success-message" th:if="${successMessage != null}">
+                        <span th:text="${successMessage}"></span>
+                    </div>
+                    <div id="errorBox" class="message-box error-message" th:if="${errorMessage != null}">
+                        <span th:text="${errorMessage}"></span>
+                    </div>
+                    <div class="image-container">
+                        <img id="previewImage"
+                            th:src="@{/photo/{filename}(filename=${user.photo != null ? user.photo : 'default-avatar.jpg'})}"
+                            alt="Profile Image" class="profile-image">
+                    </div>
+                    <input type="file" id="imageUpload" name="avatar" class="input" accept="image/*">
+                    <input class="input" type="text" name="username" id="username" th:field="*{user.username}"
+                        placeholder="Username" readonly>
+                    <input class="input" type="password" name="password" id="password" placeholder="Password"
+                        value="********">
+                    <input class="input" type="email" name="email" id="email" th:field="*{user.email}"
+                        placeholder="Email">
+                    <input class="input" type="text" name="fullname" id="fullname" th:field="*{user.fullname}"
+                        placeholder="Fullname">
+                    <input class="login-button" type="submit" value="Submit">
+                </form>
+                <script>
+                    document.getElementById('imageUpload').addEventListener('change', function (event) {
+                        const file = event.target.files[0];
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = function (e) {
+                                document.getElementById('previewImage').src = e.target.result;
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                    });
+                    document.addEventListener("DOMContentLoaded", function () {
+                        const successBox = document.getElementById("successBox");
+                        const errorBox = document.getElementById("errorBox");
+
+                        if (successBox) {
+                            successBox.style.display = "block";
+                            setTimeout(() => { successBox.style.display = "none"; }, 3000);
+                        }
+
+                        if (errorBox) {
+                            errorBox.style.display = "block";
+                            setTimeout(() => { errorBox.style.display = "none"; }, 3000);
+                        }
+                    });
+                </script>
+        </article>
+        <footer th:replace="~{layouts/footer}"></footer>
+    </div>
+</body>
+
+</html>

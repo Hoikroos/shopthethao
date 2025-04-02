@@ -1,0 +1,75 @@
+<header th:fragment="header" class="navbar navbar-expand-lg bg-primary border-bottom p-2">
+    <div class="container">
+        <a th:href="@{/home}" class="navbar-brand d-flex align-items-center text-white fw-bold">
+            <img src="/photo/logo.png" alt="Logo" class="me-2" style="width: 45px;">
+            <span>KROOSSPORT</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <th:block th:each="category : ${categories}">
+                    <li class="nav-item">
+                        <a th:href="@{/category/{id}(id=${category.id})}" class="nav-link text-white fw-semibold"
+                            th:text="${category.name}"></a>
+                    </li>
+                </th:block>
+            </ul>
+            <form class="d-flex me-3" role="search" action="/product/search" method="get">
+                <input type="search" class="form-control form-control-sm" placeholder="Tìm kiếm..." name="keywords"
+                    th:value="${keywords}">
+                <button class="btn btn-light btn-sm ms-2" type="submit">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </form>
+            <div class="dropdown text-end me-3">
+                <th:block th:if="${session.username == null}">
+                    <a href="#" class="d-block text-white text-decoration-none dropdown-toggle"
+                        data-bs-toggle="dropdown">
+                        <img src="/photo/user.png" alt="User" width="32" height="32" class="rounded-circle">
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" th:href="@{/login}"><i class="fa-solid fa-sign-in-alt me-1"></i>
+                                Đăng nhập</a></li>
+                        <li><a class="dropdown-item" th:href="@{/register}"><i class="fa-solid fa-user-plus me-1"></i>
+                                Đăng ký</a></li>
+                        <li><a class="dropdown-item" th:href="@{/forgetPassword}"><i class="fa-solid fa-key me-1"></i>
+                                Quên mật khẩu</a></li>
+                    </ul>
+                </th:block>
+
+                <th:block th:if="${session.username != null}">
+                    <a href="#" class="d-block text-white text-decoration-none dropdown-toggle"
+                        data-bs-toggle="dropdown">
+                        <img th:src="@{${session.photo != null ? '/photo/' + session.photo : '/photo/default-avatar.png'}}"
+                            alt="User" width="32" height="32" class="rounded-circle">
+                        <span th:text="${session.fullname}"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" th:href="@{/editProfile}"><i class="fa-solid fa-user-pen me-1"></i>
+                                Chỉnh sửa tài khoản</a></li>
+                        <li><a class="dropdown-item" th:href="@{/changePassword}"><i class="fa-solid fa-lock me-1"></i>
+                                Đổi mật khẩu</a></li>
+                        <li><a class="dropdown-item" th:href="@{/logout}"><i class="fa-solid fa-sign-out-alt me-1"></i>
+                                Đăng xuất</a></li>
+                        <th:block th:if="${session.admin}">
+                            <li><a class="dropdown-item" th:href="@{/admin}"><i class="fa-solid fa-user-gear me-1"></i>
+                                    Quản lý</a></li>
+                        </th:block>
+                    </ul>
+                </th:block>
+            </div>
+            <a class="nav-link text-white position-relative me-3" th:href="@{/cart/view}">
+                <i class="fa-solid fa-cart-shopping fa-lg"></i>
+                <span th:if="${cartQuantity > 0}"
+                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                    th:text="${cartQuantity}"></span>
+            </a>
+            <a th:href="@{/invoices/my-orders}" class="nav-link text-white">
+                <i class="fa-solid fa-box-archive fa-lg"></i>
+            </a>
+        </div>
+    </div>
+</header>
